@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="3.0" xmlns="https://jakarta.ee/xml/ns/persistence"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="https://jakarta.ee/xml/ns/persistence https://jakarta.ee/xml/ns/persistence/persistence_3_0.xsd">
+    
+    <persistence-unit name="eclipselink-pu" transaction-type="RESOURCE_LOCAL">
+        <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+        <class>lab.eclipselink.entity.Shop</class>
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <!-- Database connection properties -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:postgresql://localhost:5432/qorm"/>
+            <property name="jakarta.persistence.jdbc.user" value="qorm"/>
+            <property name="jakarta.persistence.jdbc.password" value="qorm"/>
+            
+            <!-- EclipseLink specific properties -->
+            <property name="eclipselink.target-database" value="PostgreSQL"/>
+            <property name="eclipselink.ddl-generation" value="drop-and-create-tables"/>
+            <property name="eclipselink.ddl-generation.output-mode" value="database"/>
+            <property name="eclipselink.logging.level" value="FINE"/>
+            <property name="eclipselink.logging.level.sql" value="FINE"/>
+            <property name="eclipselink.logging.level.cache" value="FINE"/>
+            <property name="eclipselink.logging.parameters" value="true"/>
+            
+            <!-- Cache Configuration for EclipseLink -->
+            <property name="eclipselink.cache.shared.default" value="false"/>
+            <property name="eclipselink.cache.shared.lab.eclipselink.entity.Shop" value="true"/>
+            <property name="eclipselink.cache.size.default" value="1000"/>
+            <property name="eclipselink.cache.size.lab.eclipselink.entity.Shop" value="500"/>
+            <property name="eclipselink.cache.type.default" value="SoftWeak"/>
+            <property name="eclipselink.cache.type.lab.eclipselink.entity.Shop" value="SoftWeak"/>
+            
+            <!-- Cache coordination disabled (different tables) - remove property instead of using 'none' -->
+            <!-- No cache coordination needed for this setup -->
+            
+            <!-- Connection pool settings coordinated with Quarkus -->
+            <property name="eclipselink.connection-pool.default.initial" value="2"/>
+            <property name="eclipselink.connection-pool.default.min" value="2"/>
+            <property name="eclipselink.connection-pool.default.max" value="10"/>
+            <property name="eclipselink.connection-pool.default.timeout" value="30000"/>
+            
+            <!-- Transaction configuration -->
+            <property name="eclipselink.persistence-context.reference-mode" value="FORCE_WEAK"/>
+            <property name="eclipselink.persistence-context.close-on-commit" value="true"/>
+            <property name="eclipselink.persistence-context.persist-on-commit" value="true"/>
+            
+            <!-- Performance and monitoring -->
+            <property name="eclipselink.jpa.uppercase-column-names" value="false"/>
+            <property name="eclipselink.orm.throw.exceptions" value="true"/>
+        </properties>
+    </persistence-unit>
+</persistence>
