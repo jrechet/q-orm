@@ -6,7 +6,8 @@
       "Bash(./mvnw:*)",
       "Bash(java:*)",
       "Bash(rm:*)",
-      "Bash(chmod:*)"
+      "Bash(chmod:*)",
+      "Bash(mvn test:*)"
     ],
     "deny": []
   }
