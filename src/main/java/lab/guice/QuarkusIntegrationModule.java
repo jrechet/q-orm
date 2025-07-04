@@ -9,6 +9,7 @@ import io.quarkus.arc.InstanceHandle;
 import lab.quarkus.service.GiftService;
 import lab.quarkus.repository.GiftRepository;
 import lab.guice.service.GuiceGiftService;
+import lab.guice.service.PureGuiceService;
 import org.jboss.logging.Logger;
 
 /**
@@ -29,6 +30,9 @@ public class QuarkusIntegrationModule extends AbstractModule {
         
         // Configuration du service Guice qui utilise les composants Quarkus
         bind(GuiceGiftService.class).toProvider(GuiceGiftServiceProvider.class).in(Singleton.class);
+        
+        // Configuration des services purement Guice
+        bind(PureGuiceService.class).in(Singleton.class);
     }
     
     /**
